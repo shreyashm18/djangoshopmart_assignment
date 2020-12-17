@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% block content %}
+    
+    <h3>Categories: </h3>
+        <ul>
+            {% for category in categorys %}
+
+        <li>{{category.category_name}}</li>
+        {% if category.product %}
+        <ol>
+            {% for product in category.product %}
+            
+                <li> {{product.product_name}}  
+                    <br>
+                    {% if request.role == 'Admin' %}
+                    <a href="{% url 'update_prod' product.id %}" class="btn btn-warning" id = '{{product.id}}'>edit</a>
+                    <a href="{% url 'delete_prod' product.id %}" class="btn btn-danger" id = '{{product.id}}'>delete</a>
+                    {%endif%}
+                
+            </li>  
+            {%endfor%}
+        </ol>
+        {%endif%}
+        {%endfor%}
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .tab {
+        tab-size: 2;
+    }
+    </style>
+</head>
+<body>
+    <div class="card-columns">
+        {% for prod in products %}
+        <div class="card" style="width: 18rem;">
+      <h5 class="card-title">{{ prod.category }}</h5><h5 class="tab">{{prod.price}} Rs</h5>      
+      <img class="card-img-top" src="{{ prod.image.url }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ prod.product_name }}</h5>
+        <p class="card-text">{{ prod.description }}</p>
+        
+       <div class="card-footer bg-transparent border-dark">
+        <center>
+            <a href="{% url 'update_prod' prod.id %}" class="btn btn-warning" id = '{{prod.id}}'>edit</a>
+            <a href="{% url 'delete_prod' prod.id %}" class="btn btn-danger" id = '{{prod.id}}'>delete</a>
+            <a href="{% url 'add_to_cart' prod.id %}" class="btn btn-warning" id = '{{prod.id}}'>Add to Cart</a>
+         </center>
+       
+        </div>
+      </div>
+    </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock content %}
+</html>
